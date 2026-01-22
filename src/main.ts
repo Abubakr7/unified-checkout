@@ -4,8 +4,11 @@ import { AppModule } from './app.module';
 import { join } from 'path';
 import * as fs from 'fs';
 import { ConfigService } from '@nestjs/config';
+import { configureProxy } from './config/proxy.config';
 
 async function bootstrap() {
+  // Configure proxy support for external API calls (e.g., CyberSource API)
+  configureProxy();
   // SSL configuration
   let httpsOptions = null;
 

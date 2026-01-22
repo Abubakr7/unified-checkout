@@ -17,13 +17,15 @@
   },
   "dependencies": {
     "@nestjs/common": "^10.3.0",
-    "@nestjs/core": "^10.3.0",
     "@nestjs/config": "^3.1.1",
+    "@nestjs/core": "^10.3.0",
     "@nestjs/platform-express": "^10.3.0",
     "cybersource-rest-client": "0.0.65",
     "ejs": "^3.1.10",
-    "jwk-to-pem": "^2.0.0",
+    "http-proxy-agent": "^7.0.2",
+    "https-proxy-agent": "^7.0.6",
     "jsonwebtoken": "^8.5.1",
+    "jwk-to-pem": "^2.0.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1"
   },
