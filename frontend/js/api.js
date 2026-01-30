@@ -1,7 +1,10 @@
 /**
  * API Client for CyberSource Unified Checkout Backend
  */
-const API_BASE_URL = 'https://localhost:3000/api';
+// Auto-detect protocol based on current page or use HTTP for local development
+const API_BASE_URL = window.location.protocol === 'https:'
+  ? 'https://localhost:3000/api'
+  : 'http://localhost:3000/api';
 
 const api = {
   /**
