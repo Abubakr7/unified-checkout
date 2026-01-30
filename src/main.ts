@@ -35,7 +35,23 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
   const port = configService.get<number>('app.port', 3000);
 
-  // Configure view engine
+  // Enable CORS for frontend separation
+  app.enableCors({
+    origin: [
+      'http://localhost:5500',
+      'http://localhost:5501',
+      'http://127.0.0.1:5500',
+      'http://127.0.0.1:5501',
+      'https://localhost:5500',
+      'https://localhost:5501',
+      configService.get<string>('FRONTEND_URL', 'http://localhost:5500'),
+    ],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+  });
+
+  // Configure view engine (kept for backward compatibility)
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
   app.setViewEngine('ejs');
 
@@ -49,12 +65,16 @@ async function bootstrap() {
   await app.listen(port);
 
   console.log(`
-╔═══════════════════════════════════════════════════════════╗
-║  CyberSource Unified Checkout - NestJS Application       ║
-╠═══════════════════════════════════════════════════════════╣
-║  Application running on: ${httpsOptions ? 'https' : 'http'}://localhost:${port}           ║
-║  Environment: ${configService.get('NODE_ENV', 'development').padEnd(43)}║
-╚═══════════════════════════════════════════════════════════╝
+╔═══════════════════════════════════════════════════════════════╗
+║  CyberSource Unified Checkout - NestJS Backend API           ║
+╠═══════════════════════════════════════════════════════════════╣
+║  Backend API: ${httpsOptions ? 'https' : 'http'}://localhost:${port}                          ║
+║  API Endpoints: ${httpsOptions ? 'https' : 'http'}://localhost:${port}/api                    ║
+║  Environment: ${configService.get('NODE_ENV', 'development').padEnd(47)}║
+╠═══════════════════════════════════════════════════════════════╣
+║  Frontend: Run 'npm run start:frontend' (http://localhost:5500)   ║
+║  Legacy UI: ${httpsOptions ? 'https' : 'http'}://localhost:${port} (EJS templates)            ║
+╚═══════════════════════════════════════════════════════════════╝
   `);
 }
 
