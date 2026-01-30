@@ -1,0 +1,14 @@
+{
+  "name": "unified-checkout-frontend",
+  "version": "1.0.0",
+  "description": "Standalone frontend for CyberSource Unified Checkout",
+  "scripts": {
+    "start": "npx serve -l 5500",
+    "start:ssl": "npx serve -l 5500 --ssl-cert ../ssl/cert.pem --ssl-key ../ssl/key.pem"
+  },
+  "keywords": ["cybersource", "checkout", "frontend"],
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.0"
+  }
+}
